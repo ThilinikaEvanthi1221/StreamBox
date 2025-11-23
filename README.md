@@ -6,7 +6,6 @@ A React Native mobile application for browsing movies, managing favourites, and 
 
 - **User Authentication** - Register and login with your own credentials
 - **Browse Movies** - View trending and popular movies
-- **Search** - Find movies by title
 - **Movie Details** - See comprehensive information about each movie
 - **Favourites** - Save and manage your favourite movies
 - **Dark Mode** - Toggle between light and dark themes
@@ -58,16 +57,3 @@ Then login with your registered credentials.
 - Search for specific movies using the search bar
 - Tap on any movie to see detailed information
 - Add movies to your favourites by tapping the heart icon
-
-## Project Structure
-
-```
-src/
-├── components/     # Reusable UI components
-├── screens/        # Screen components
-├── navigation/     # Navigation configuration
-├── redux/          # State management
-├── services/       # API services
-├── utils/          # Utility functions
-└── constants/      # App constants
-```
