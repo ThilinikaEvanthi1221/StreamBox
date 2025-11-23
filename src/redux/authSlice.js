@@ -33,9 +33,8 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, action) => {
       state.loading = false;
-      state.isAuthenticated = true;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+      // Don't set isAuthenticated to true after registration
+      // User needs to login manually
       state.error = null;
     },
     registerFailure: (state, action) => {

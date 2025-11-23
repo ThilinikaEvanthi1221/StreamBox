@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,23 +6,39 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { MovieCard } from '../components';
+import { toggleFavourite } from '../redux';
+import { storeFavourites } from '../utils';
 import { COLORS } from '../constants';
 
 const FavouritesScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const { items: favourites } = useSelector((state) => state.favourites);
   const isDark = useSelector((state) => state.theme.isDark);
   const colors = isDark ? COLORS.dark : COLORS.light;
+
+  // Refresh the screen when it comes into focus
+  useFocusEffect(
+    React.useCallback(() => {
+      // The favourites are already in Redux, just re-render
+      // This ensures the list updates when returning to this screen
+    }, [favourites])
+  );
 
   const handleMoviePress = (movie) => {
     navigation.navigate('MovieDetails', { movieId: movie.id });
   };
 
-  const handleFavouritePress = (movie) => {
-    // The MovieCard component will handle the toggle
-    // Redux action will be dispatched from there
+  const handleFavouritePress = async (movie) => {
+    // Toggle favourite in Redux
+    dispatch(toggleFavourite(movie));
+
+    // Update storage
+    const updatedFavourites = favourites.filter((fav) => fav.id !== movie.id);
+    await storeFavourites(updatedFavourites);
   };
 
   const isFavourite = (movieId) => {

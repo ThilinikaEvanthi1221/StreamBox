@@ -40,11 +40,16 @@ const RegisterScreen = ({ navigation }) => {
   }, [error]);
 
   const handleInputChange = async (field, value) => {
-    setFormData({ ...formData, [field]: value });
+    const updatedFormData = { ...formData, [field]: value };
+    setFormData(updatedFormData);
 
-    // Real-time validation
-    const error = await validateField(registerSchema, field, value);
-    setErrors({ ...errors, [field]: error });
+    // Real-time validation with full form context
+    try {
+      await registerSchema.validateAt(field, updatedFormData);
+      setErrors({ ...errors, [field]: null });
+    } catch (err) {
+      setErrors({ ...errors, [field]: err.message });
+    }
   };
 
   const validateForm = async () => {
@@ -77,16 +82,20 @@ const RegisterScreen = ({ navigation }) => {
         formData.password
       );
 
-      // Store token and user data securely
-      await storeUserToken(response.token);
-      await storeUserData(response.user);
-
+      // Don't auto-login, just show success and navigate to login
       dispatch(registerSuccess(response));
 
       Alert.alert(
         'Success',
-        'Your account has been created successfully!',
-        [{ text: 'OK' }]
+        'Your account has been created successfully! Please log in with your credentials.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Login');
+            }
+          }
+        ]
       );
     } catch (err) {
       dispatch(registerFailure(err.message));
@@ -190,7 +199,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingVertical: 40,
+    paddingVertical: 80, // Lower the signup body
   },
   header: {
     marginBottom: 32,

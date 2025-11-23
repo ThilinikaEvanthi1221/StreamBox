@@ -4,11 +4,15 @@ import { LoginScreen, RegisterScreen } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
+
 const AuthNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        animation: 'fade_from_bottom',
+        animationDuration: 300,
+        contentStyle: { backgroundColor: 'transparent' },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />

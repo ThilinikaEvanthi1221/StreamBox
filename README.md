@@ -9,9 +9,9 @@ A feature-rich React Native mobile application built with Expo for browsing tren
 - **User Authentication**
 
   - Login and Registration with form validation using Yup
-  - Secure token-based authentication
+  - Dummy JSON/local authentication only (no real API calls)
+  - Secure token-based authentication (local only)
   - Persistent login sessions
-  - Demo credentials provided for testing
 
 - **Home Screen**
 
@@ -165,44 +165,15 @@ StreamBox/
    - Press `w` for web browser
    - Scan QR code with Expo Go app on your phone
 
-## 📱 Demo Credentials
+## 📱 Authentication
 
-### Local Demo Account
+Register your own account with:
 
-For testing with local authentication:
-
-- **Email**: demo@streambox.com
-- **Password**: Demo123
-
-### DummyJSON Test Accounts
-
-The app integrates with DummyJSON API. You can also login with these test accounts:
-
-**Account 1:**
-
-- **Email**: emily@example.com or emilys@example.com
-- **Username**: emilys
-- **Password**: emilyspass
-
-**Account 2:**
-
-- **Email**: michael@example.com
-- **Username**: michaelw
-- **Password**: michaelwpass
-
-**Account 3:**
-
-- **Email**: sophia@example.com
-- **Username**: sophiab
-- **Password**: sophiabpass
-
-### Register New Account
-
-Or register a new account with:
-
-- Username: min 3 characters, alphanumeric
+- Username: minimum 3 characters, alphanumeric
 - Email: valid email format
-- Password: min 6 characters, must include uppercase, lowercase, and number
+- Password: minimum 6 characters (must include uppercase, lowercase, and number)
+
+Then login using your registered credentials. No test/demo emails are provided; each user manages their own login.
 
 ## 🔧 Technologies Used
 
