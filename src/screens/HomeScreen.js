@@ -130,7 +130,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.header}>
       <View style={styles.userInfo}>
         <Text style={[styles.greeting, { color: colors.textSecondary }]}>
-          Welcome back,
+          Welcome
         </Text>
         <Text style={[styles.username, { color: colors.text }]}>
           {user?.username || 'User'}
