@@ -17,66 +17,25 @@ let registeredUsers = [
 
 // Login service using DummyJSON API
 export const loginUser = async (email, password) => {
-  try {
-    // Check if it's a locally registered user first
-    const localUser = registeredUsers.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (localUser) {
-      return {
-        token: `local_token_${localUser.id}_${Date.now()}`,
-        user: {
-          id: localUser.id,
-          username: localUser.username,
-          email: localUser.email,
-          firstName: localUser.firstName,
-          lastName: localUser.lastName,
-        },
-      };
-    }
-
-    // Try DummyJSON authentication with username mapping
-    // DummyJSON test credentials: username: emilys, password: emilyspass
-    // Map common email patterns to DummyJSON usernames
-    let username = email.split('@')[0];
-    
-    // Special mappings for DummyJSON test users
-    const emailToUsernameMap = {
-      'emily@example.com': 'emilys',
-      'emilys@example.com': 'emilys',
-      'michael@example.com': 'michaelw',
-      'sophia@example.com': 'sophiab',
-    };
-
-    if (emailToUsernameMap[email.toLowerCase()]) {
-      username = emailToUsernameMap[email.toLowerCase()];
-    }
-
-    const response = await axios.post(`${DUMMYJSON_BASE_URL}/auth/login`, {
-      username: username,
-      password: password,
-      expiresInMins: 60,
-    });
-
-    const userData = {
-      id: response.data.id,
-      username: response.data.username,
-      email: response.data.email,
-      firstName: response.data.firstName,
-      lastName: response.data.lastName,
-    };
-
+  // Only use local dummy users for authentication
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  const localUser = registeredUsers.find(
+    (u) => u.email === email && u.password === password
+  );
+  if (localUser) {
     return {
-      token: response.data.token,
-      user: userData,
+      token: `local_token_${localUser.id}_${Date.now()}`,
+      user: {
+        id: localUser.id,
+        username: localUser.username,
+        email: localUser.email,
+        firstName: localUser.firstName,
+        lastName: localUser.lastName,
+      },
     };
-  } catch (error) {
-    if (error.response?.status === 400) {
-      throw new Error('Invalid email or password');
-    }
-    throw new Error(error.response?.data?.message || 'Login failed. Please try again.');
   }
+  throw new Error('Invalid email or password');
 };
 
 // Register service (simulated - stores locally)

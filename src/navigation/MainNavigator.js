@@ -149,6 +149,7 @@ const MainNavigator = () => {
           shadowOpacity: 0.2,
           shadowRadius: 8,
           position: 'relative',
+          marginBottom: 20,
         },
         tabBarLabelStyle: {
           fontSize: 12,

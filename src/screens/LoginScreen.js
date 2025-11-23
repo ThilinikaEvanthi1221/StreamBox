@@ -141,17 +141,7 @@ const LoginScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <View style={styles.demoInfo}>
-              <Text style={[styles.demoText, { color: colors.textSecondary }]}>
-                Demo Credentials:
-              </Text>
-              <Text style={[styles.demoText, { color: colors.textSecondary }]}>
-                Local: demo@streambox.com / Demo123
-              </Text>
-              <Text style={[styles.demoText, { color: colors.textSecondary }]}>
-                DummyJSON: emilys@example.com / emilyspass
-              </Text>
-            </View>
+            {/* Instructions removed as requested */}
           </View>
         </View>
       </ScrollView>
